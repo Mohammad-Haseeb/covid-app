@@ -34,13 +34,13 @@ export default function TotalCases() {
     <div className={classes.root}>
       <Grid container spacing={7} justify="center">
        
-        <Grid item xs={12} sm={4}  >
+        <Grid item xs={12} sm={3}  >
   <Paper className={classes.paper}>{<Details/>}</Paper>
         </Grid>
-        <Grid item xs={12} sm={4}  >
+        <Grid item xs={12} sm={3}  >
           <Paper className={classes.paper}>{<Details/>}</Paper>
         </Grid>
-        <Grid item xs={12} sm={4}  >
+        <Grid item xs={12} sm={3}  >
           <Paper className={classes.paper}>{<Details/>}</Paper>
         </Grid>
        

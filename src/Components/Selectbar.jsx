@@ -1,29 +1,38 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
+    Centeralize:{
+    
+      width:"100px",
+      height:"100px",
+      margin:"0 auto",
+    },
   formControl: {
+    
     margin: theme.spacing(1),
     minWidth: 120,
   },
 }));
 
-export default function SelectBar() {
+export default function SelectBar({country}) {
+    
+  
+    
+
+
+
+      
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [CountryISO, setCountryISO] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCountryISO(event.target.value);
   };
 
   const handleClose = () => {
@@ -36,9 +45,10 @@ export default function SelectBar() {
 
   return (
     <div>
-      <Button className={classes.button} onClick={handleOpen}>
-        Open the select
-      </Button>
+      
+          
+
+         <div className={classes.Centeralize}>  
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
         <Select
@@ -47,17 +57,32 @@ export default function SelectBar() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
+          value={CountryISO}
+          onChange={handleChange}>
+          <MenuItem value="Worldwide">
+            <em>Worldwide</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          
+        { 
+         country.map((country)=>{
+                  return <MenuItem value={country.iso}>{country.country}</MenuItem>
+                  })
+             }
+          
+         
+        
         </Select>
       </FormControl>
+
+      {
+                 
+                      
+              }
+   
+     
+      </div>
+     
     </div>
+
   );
 }

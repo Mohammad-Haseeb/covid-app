@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -28,8 +28,8 @@ export default function SelectBar({country}) {
 
       
   const classes = useStyles();
-  const [CountryISO, setCountryISO] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [CountryISO, setCountryISO] = useState('');
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
     setCountryISO(event.target.value);
@@ -64,8 +64,8 @@ export default function SelectBar({country}) {
           </MenuItem>
           
         { 
-         country.map((country)=>{
-                  return <MenuItem value={country.iso}>{country.country}</MenuItem>
+         country.map((country,ind)=>{
+                  return <MenuItem value={country.iso} key={ind}>{country.country}</MenuItem>
                   })
              }
           

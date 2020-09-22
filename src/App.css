@@ -1,0 +1,46 @@
+
+.colorgreen{
+    height: 10px;
+    width: 100%;
+    background-color: #66bb6a;
+}
+.colorblue{
+    height: 10px;
+    width: 100%;
+    
+    background-color: #3949ab;
+    /* background-color: c#c4c5c5; */
+}
+.colorred{
+    height: 10px;
+    width: 100%;
+
+    background-color: #b22a00;
+}
+.coron{
+    background-color: aqua;
+    margin-top: 5px;
+    height: 30px;
+    padding-left: 05px;
+    font-size: 1.5em;
+    font-family: 'Oswald', sans-serif;
+}
+
+.textgreen{
+    color:  #66bb6a;
+    margin-left: 15px;
+}
+.textblue{
+    color:#3949ab;
+    margin-left: 15px;
+}
+.textred{
+    color: #b22a00;
+    margin-left: 15px;
+}
+h4.description{
+    margin-left: 15px;
+}
+h5.total{
+    margin-left: 15px;
+}

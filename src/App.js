@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SelectBar from './Components/Selectbar';
 import NestedGrid from './Components/Grid'
 import {CountryProvider} from './Management/CountryAvalable';
+import ChartAndDisplay from './Components/ChartAndTableDisply';
 
 import './App.css'
 
@@ -40,7 +41,7 @@ export default function App(){
      
     <div className="NestedGrid">
     <NestedGrid/>
-
+    <ChartAndDisplay/>
     </div >
     </CountryProvider.Provider>
     

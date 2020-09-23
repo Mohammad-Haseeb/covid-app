@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SelectBar({country}) {
+  console.log("contry : ",country)
     
   
     
@@ -29,10 +30,12 @@ export default function SelectBar({country}) {
 
       
   const classes = useStyles();
-  const [CountryISO, setCountryISO] = useState('');
+  const [CountryISO, setCountryISO] = useState('Worldwide');
   const [open, setOpen] = useState(false);
   const context = useContext(CountryProvider);
+  console.log("SELECTED COUNTRY : ",CountryISO);
   context[1](CountryISO)
+
   const handleChange = (event) => {
     setCountryISO(event.target.value);
   };

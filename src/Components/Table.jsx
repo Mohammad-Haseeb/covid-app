@@ -48,8 +48,8 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {rows.map((row,ind) => (
-            <TableRow key={row.name} className={ind%2===0?"blackColor":"whiteColor"} >
-              <TableCell component="th" scope="row" className={ind%2===0?"blackColor":"whiteColor"}>
+            <TableRow key={row.name}  >
+              <TableCell component="th" scope="row" >
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.calories}</TableCell>

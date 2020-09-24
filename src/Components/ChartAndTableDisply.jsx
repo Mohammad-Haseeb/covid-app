@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Chart from './Chart';
-import BasicTable from './Table'
+import BasicTable from './Table';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -18,7 +18,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ChartAndDisplay() {
   const classes = useStyles();
+       
 
+
+
+
+
+  
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>

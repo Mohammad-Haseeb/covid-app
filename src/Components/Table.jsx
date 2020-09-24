@@ -1,63 +1,154 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { useEffect ,useState} from 'react';
+import {withStyles, makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 50,
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
+
+
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
   },
-  blackColor:{
-      backgroundColor:"black",
+  body: {
+    fontSize: 9
   }
-,
-  whiteColor:{
-      backgroundColor:"white",
-  },
-});
+}))(TableCell);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover
+    }
+  }
+}))(TableRow);
+
+function createData(name, calories) {
+  return { name, calories };
 }
-
 const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
+
 ];
 
-export default function BasicTable() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  table: {
+    minWidth: 100,
+    maxHeight: 400
+  },
+  fonting:{
+    fontSize:"19px",
+    fontFamily: 'Oswald',
+  },
+  gridList: {
+    width: "auto",
+    height: "auto",
+  },
+}));
+export default function BasicTable(){
+  const [TableData, setTableData] = useState([])
+     
+  useEffect(()=>{
+    let SettingArray;
+         async  function APICallingForContry(){
+              let Api=await fetch("https://disease.sh/v3/covid-19/countries");
+                let  CountryApi=await Api.json()
+                SettingArray=await CountryApi.map((x)=>{
+                 return({
+                   "country":x.country,
+                   "cases":x.cases,
+                   
+                 })
+
+                })
+                setTableData(SettingArray);
+
+
+          }
+
+          APICallingForContry()
+                                            
+  },[])
+               TableData.map((x)=>{
+                return rows.push(createData(x.country,x.cases));
+               })
+   
+
+
+
+           console.log("TABLE : ",TableData)
+
+
+
+
   const classes = useStyles();
 
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table"  >
+
+
+ return (
+      <>
+      <GridList cellHeight={380} className={classes.gridList} cols={0}>
+ 
+  
+           
+           <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="customized table">
         <TableHead>
-          <TableRow className={classes.blackColor} className={classes.text}>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-          
+          <TableRow>
+            <StyledTableCell>Country</StyledTableCell>
+            <StyledTableCell align="right">Cases</StyledTableCell>
+           
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row,ind) => (
-            <TableRow key={row.name}  >
-              <TableCell component="th" scope="row" >
+          {rows.map((row) => (
+            <StyledTableRow key={row.name} className={classes.fonting}>
+              <StyledTableCell component="th" scope="row" className={classes.fonting}>
                 {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-             
-            </TableRow>
+              </StyledTableCell>
+              <StyledTableCell align="right" className={classes.fonting}>{row.calories}</StyledTableCell>
+           
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+</GridList>
+      </>
+
+ );
 }

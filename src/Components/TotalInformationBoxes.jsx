@@ -3,6 +3,7 @@ import '../App.css';
 
 
 export default function  TotalInformation(props){
+  
   let backgroundColor=props.color==="green" ?"colorgreen":props.color==="blue" ?"colorblue":"colorred";
   let textColor=props.color==="green" ?"textgreen":props.color==="blue" ?"textblue":"textred";
   

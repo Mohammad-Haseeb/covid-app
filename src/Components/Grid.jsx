@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TotalInformation from './TotalInformationBoxes';
-import {CountryProvider} from '../Management/CountryAvalable'
+import {CountryProvider,SelectedCountryData} from '../Management/CountryAvalable'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -19,6 +19,7 @@ export default function NestedGrid() {
          const selectedCountryISO = useContext(CountryProvider);
          console.log("ISO CHECKER : ", selectedCountryISO[0])
          let [stat, setstat] = useState({})
+         let Data4Graph=useContext(SelectedCountryData);
          
             useEffect(() => {
                 async function StateCollector(){
@@ -33,7 +34,9 @@ export default function NestedGrid() {
                                   recovered:api.recovered,
                                   todayRecovered:api.todayRecovered        
                            }
-                                   setstat(y);  
+                                   setstat(y); 
+                                 
+                                 
                                }
                                else{
                                  let ap= await fetch(`https://disease.sh/v3/covid-19/countries/${selectedCountryISO[0]}?strict=true`);
@@ -46,6 +49,7 @@ export default function NestedGrid() {
                                   todayRecovered:api.todayRecovered        
                            }
                                  setstat(y);
+
 
                                
                            }
@@ -68,7 +72,10 @@ export default function NestedGrid() {
     <div className={classes.root}>
       
       { 
-        console.log("LOGOER : ",stat.deaths)
+      
+        Data4Graph[1](stat)
+
+     
       }
       <Grid container spacing={2} justify="center">
         <Grid item xs={11} sm={3}>

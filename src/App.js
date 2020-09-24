@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SelectBar from './Components/Selectbar';
 import NestedGrid from './Components/Grid'
-import {CountryProvider} from './Management/CountryAvalable';
+import {CountryProvider,SelectedCountryData} from './Management/CountryAvalable';
 import ChartAndDisplay from './Components/ChartAndTableDisply';
 
 import './App.css'
@@ -9,6 +9,7 @@ import './App.css'
 export default function App(){
   let [contry,setCountry]=useState([]);
   let selected_Country=useState("Worldwide");
+  let DataOfSelectCountry=useState({});
      useEffect(()=>{
        let SettingArray;
             async  function APICallingForContry(){
@@ -36,13 +37,19 @@ export default function App(){
     <>
          
         <CountryProvider.Provider value={selected_Country}>
+   
            
      <SelectBar country={contry}/> 
      
     <div className="NestedGrid">
+    <SelectedCountryData.Provider value={DataOfSelectCountry}>
     <NestedGrid/>
     <ChartAndDisplay/>
+    </SelectedCountryData.Provider>
+  
+
     </div >
+
     </CountryProvider.Provider>
     
     </>
